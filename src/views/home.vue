@@ -1,44 +1,49 @@
 <script setup>
-const novels = [
+import { ref } from 'vue'
+
+const novels = ref([
   {
     id: 1,
-    title: 'terisekai ke dunia loli',
+    title: 'syren the robot killer',
     image: '/novel1.jpg',
-    button: 'baca'
+    button: 'Baca'
   },
   {
     id: 2,
-    title: 'terisekai ke dunia loli',
+    title: 'date a live',
     image: '/novel1.jpg',
-    button: 'baca'
+    button: 'Baca'
   },
   {
     id: 3,
-    title: 'terisekai ke dunia loli',
+    title: 'Loli Elf dan Dunia Ajaib',
     image: '/novel1.jpg',
-    button: 'baca'
+    button: 'Baca'
   }
-]
+])
 </script>
 
 <template>
-    <div class="app">
-      <header class="header">
-        <h1 class="logo">first novel</h1>
-        <img src="/ikon.png" class="search-icon" alt="Search" />
-      </header>
+  <div class="app">
+    <header class="header">
+      <h1 class="logo">First Novel</h1>
+    </header>
 
-      <h2 class="subtitle">daftar novel</h2>
-  
-      <main class="novel-list">
-        <div class="novel-card" v-for="n in novels" :key="n.id">
+    <h2 class="subtitle">Daftar Novel</h2>
+
+    <main class="novel-list">
+      <div class="novel-card" v-for="n in novels" :key="n.id">
+        <router-link :to="`/novel/${n.id}`">
           <img :src="n.image" class="novel-cover" />
-          <div class="novel-title">{{ n.title }}</div>
+        </router-link>
+        <div class="novel-title">{{ n.title }}</div>
+        <router-link :to="`/novel/${n.id}`" class="novel-button-link">
           <div class="novel-button">{{ n.button }}</div>
-        </div>
-      </main>
-    </div>
-  </template>
+        </router-link>
+      </div>
+    </main>
+  </div>
+</template>
 
 <style scoped>
 .app {
@@ -87,6 +92,7 @@ const novels = [
   width: 100%;
   height: 220px;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .novel-title {
@@ -95,11 +101,17 @@ const novels = [
   margin-top: 0.5rem;
 }
 
+.novel-button-link {
+  text-decoration: none;
+}
+
 .novel-button {
   background: blue;
   color: white;
   padding: 0.5rem;
-  margin-top: 0.5rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .subtitle {
